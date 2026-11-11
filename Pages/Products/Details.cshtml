@@ -1,0 +1,52 @@
+@page
+@model DetailsModel
+@{
+    ViewData["Title"] = Model.Product!.Name;
+}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-7">
+        <div class="card shadow rounded-4">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge bg-secondary">ID: @Model.Product.Id</span>
+                    @if (Model.Product.IsAvailable)
+                    {
+                        <span class="badge bg-success">В наличии</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Нет в наличии</span>
+                    }
+                </div>
+                <h2 class="fw-bold mb-4">@Model.Product.Name</h2>
+
+                <dl class="row">
+                    <dt class="col-sm-4">Идентификатор</dt>
+                    <dd class="col-sm-8">@Model.Product.Id</dd>
+                    <dt class="col-sm-4">Название</dt>
+                    <dd class="col-sm-8">@Model.Product.Name</dd>
+                    <dt class="col-sm-4">Категория</dt>
+                    <dd class="col-sm-8">@Model.Product.Category</dd>
+                    <dt class="col-sm-4">Цена</dt>
+                    <dd class="col-sm-8 fs-4 fw-bold">@Model.Product.Price руб.</dd>
+                    <dt class="col-sm-4">Статус</dt>
+                    <dd class="col-sm-8">@(Model.Product.IsAvailable ? "Товар в наличии" : "Товара нет в наличии")</dd>
+                    <dt class="col-sm-4">Описание</dt>
+                    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Product.Description) ? "—" : Model.Product.Description)</dd>
+                </dl>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <a asp-page="./Index" class="btn btn-secondary"><i class="bi bi-arrow-left me-1"></i>Назад к списку</a>
+                    <a asp-page="./Edit" asp-route-id="@Model.Product.Id" class="btn btn-outline-primary">
+                        <i class="bi bi-pencil me-1"></i>Изменить
+                    </a>
+                    <form method="post" asp-page="./Index" asp-page-handler="Delete" asp-route-id="@Model.Product.Id"
+                          onsubmit="return confirm('Удалить товар?');">
+                        <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash me-1"></i>Удалить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

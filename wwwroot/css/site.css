@@ -1,0 +1,23 @@
+body { background: #f5f6fa; }
+.app-navbar { background: linear-gradient(90deg, #4f46e5, #06b6d4); }
+.app-navbar .nav-link { opacity: .9; transition: opacity .2s, transform .2s; }
+.app-navbar .nav-link:hover { opacity: 1; transform: translateY(-1px); }
+.app-footer { background: #1f2937; color: #cbd5e1; }
+
+.hero {
+    background: linear-gradient(120deg, #4f46e5, #06b6d4);
+    color: #fff;
+    border-radius: 1.5rem;
+}
+.feature-card, .product-card { transition: transform .2s ease, box-shadow .2s ease; }
+.feature-card:hover, .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 .75rem 1.5rem rgba(0,0,0,.12) !important;
+}
+.icon-box {
+    width: 44px; height: 44px; border-radius: .75rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #fff; background: linear-gradient(135deg, #4f46e5, #2563eb); font-size: 1.2rem;
+}
+.btn { transition: transform .15s ease; }
+.btn:hover { transform: translateY(-1px); }

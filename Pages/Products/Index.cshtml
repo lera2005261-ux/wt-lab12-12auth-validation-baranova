@@ -1,0 +1,87 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Каталог товаров";
+}
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+        <i class="bi bi-check-circle me-1"></i>@Model.Message
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+    </div>
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="fw-bold h2 mb-1">Каталог товаров</h1>
+        <p class="text-muted mb-0">
+            Найдено товаров: <span class="badge bg-primary rounded-pill">@Model.Products.Count</span>
+        </p>
+    </div>
+    <a asp-page="/Products/Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-1"></i>Добавить товар
+    </a>
+</div>
+
+<form method="get" class="row g-2 mb-4">
+    <div class="col-12 col-md-8 col-lg-6">
+        <input type="text" name="Search" value="@Model.Search" class="form-control"
+               placeholder="Название товара" />
+    </div>
+    <div class="col-12 col-md-auto d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="bi bi-search me-1"></i>Найти</button>
+        @if (!string.IsNullOrWhiteSpace(Model.Search))
+        {
+            <a asp-page="./Index" class="btn btn-outline-secondary">Сбросить</a>
+        }
+    </div>
+</form>
+
+@if (!Model.Products.Any())
+{
+    <div class="alert alert-info shadow-sm">
+        @(string.IsNullOrWhiteSpace(Model.Search)
+            ? "В базе данных пока нет товаров. Добавьте первый товар."
+            : $"По запросу «{Model.Search}» ничего не найдено.")
+    </div>
+}
+
+<div class="row g-4">
+    @foreach (var product in Model.Products)
+    {
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card product-card h-100 shadow-sm rounded-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="badge bg-secondary">ID: @product.Id</span>
+                        @if (product.IsAvailable)
+                        {
+                            <span class="badge bg-success">В наличии</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Нет в наличии</span>
+                        }
+                    </div>
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="text-muted"><i class="bi bi-tag me-1"></i>@product.Category</p>
+                    <p class="fs-4 fw-bold">@product.Price руб.</p>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <a asp-page="/Products/Details" asp-route-id="@product.Id"
+                           class="btn btn-sm btn-outline-primary">Подробнее</a>
+                        <a asp-page="/Products/Edit" asp-route-id="@product.Id"
+                           class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil me-1"></i>Изменить</a>
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@product.Id"
+                              onsubmit="return confirm('Удалить товар «@product.Name»?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash me-1"></i>Удалить
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

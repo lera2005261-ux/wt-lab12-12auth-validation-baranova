@@ -1,0 +1,55 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<section class="hero p-4 p-md-5 mb-4 shadow">
+    <div class="row align-items-center">
+        <div class="col-12 col-lg-8">
+            <span class="badge bg-light text-primary mb-3">WT-8 · Razor Pages + EF Core + PostgreSQL</span>
+            <h1 class="display-5 fw-bold">Система управления товарами</h1>
+            <p class="lead">
+                Веб-приложение интернет-магазина электроники на Razor Pages, Entity Framework Core и PostgreSQL:
+                каталог, поиск, подробная информация, добавление, редактирование и удаление товаров с хранением в базе данных.
+            </p>
+            <a asp-page="/Products/Index" class="btn btn-light btn-lg me-2">
+                <i class="bi bi-arrow-right-circle me-1"></i>Перейти к товарам
+            </a>
+            <a asp-page="/Products/Create" class="btn btn-outline-light btn-lg">Добавить товар</a>
+        </div>
+        <div class="col-lg-4 d-none d-lg-block text-center">
+            <i class="bi bi-laptop" style="font-size: 7rem; opacity:.9"></i>
+        </div>
+    </div>
+</section>
+
+<div class="row g-4">
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card feature-card h-100 shadow-sm rounded-4">
+            <div class="card-body">
+                <span class="icon-box mb-3"><i class="bi bi-grid"></i></span>
+                <h5 class="card-title">Каталог</h5>
+                <p class="text-muted mb-0">Адаптивная сетка карточек с ценой, категорией и статусом наличия.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card feature-card h-100 shadow-sm rounded-4">
+            <div class="card-body">
+                <span class="icon-box mb-3"><i class="bi bi-plus-square"></i></span>
+                <h5 class="card-title">Добавление</h5>
+                <p class="text-muted mb-0">Форма с валидацией: сообщения об ошибках выводятся рядом с полями.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card feature-card h-100 shadow-sm rounded-4">
+            <div class="card-body">
+                <span class="icon-box mb-3"><i class="bi bi-pencil-square"></i></span>
+                <h5 class="card-title">Редактирование и удаление</h5>
+                <p class="text-muted mb-0">Изменение товара и удаление с возвратом к списку.</p>
+            </div>
+        </div>
+    </div>
+</div>

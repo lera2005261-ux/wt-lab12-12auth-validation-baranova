@@ -1,0 +1,46 @@
+@page
+@model EditModel
+@{
+    ViewData["Title"] = "Изменение товара";
+}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow-sm rounded-4">
+            <div class="card-body p-4">
+                <h2 class="h4 mb-4">Изменение товара <span class="badge bg-secondary">ID: @Model.Product.Id</span></h2>
+
+                <form method="post" asp-route-id="@Model.Product.Id">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Product.Name" class="form-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Category" class="form-label"></label>
+                <input asp-for="Product.Category" class="form-control" />
+                <span asp-validation-for="Product.Category" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Price" class="form-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Description" class="form-label"></label>
+                <textarea asp-for="Product.Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-check form-switch mb-4">
+                <input asp-for="Product.IsAvailable" class="form-check-input" />
+                <label asp-for="Product.IsAvailable" class="form-check-label"></label>
+            </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
